@@ -1,0 +1,16 @@
+{% set i = namespace(value=0) %}
+        {% for image_row in images | batch(3, '') %}
+          {% for image in image_row %}
+          <div class="col-md4">
+            <div class="card mb-4 box-shadow">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text">
+                  <a target="_blank" href="{{ urls[i.value] }}">{{ titles[i.value] }}</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% set i.value = i.value + 1 %}
+          {% endfor %}
+        {% endfor %}
