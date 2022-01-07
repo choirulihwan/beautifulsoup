@@ -11,7 +11,7 @@ page = (r.text)
 soup=bs(page,'html.parser')
 
 data = soup.find_all('script')
-hasil = data[32].string
+hasil = data[33].string
 
 hasil2 = hasil.split(' = ')
 hasil_text = hasil2[1].replace(";", "")
@@ -33,22 +33,28 @@ for d in hasil_obj['contents']['twoColumnBrowseResultsRenderer']['tabs'][0]['tab
 
     judul = snippet["title"]
     jml_view = statistics["viewCount"]
-    # if statistics["commentCount"]:
-    #     jml_comment = statistics["commentCount"]
-    # else:
-    #     jml_comment = '0'
     jml_like = statistics["likeCount"]
-    jml_dislike = statistics["dislikeCount"]
+
+    try:
+        jml_dislike = statistics["dislikeCount"]
+    except:
+        jml_dislike = 0
+
+    try:
+        jml_comment = statistics["commentCount"]
+    except:
+        jml_comment = 0
+
 
     # judul = d.get('richItemRenderer')['content']['videoRenderer']['title']['runs'][0]['text']
     # jml_view = d.get('richItemRenderer')['content']['videoRenderer']['viewCountText']['simpleText'].split()
-    # print(judul + " " + jml_view)
+
     d1.append(
         {
             'Judul': judul,
             # 'View': jml_view[0].replace(".",""),
             'View': jml_view,
-            # 'Comment': jml_comment,
+            'Comment': jml_comment,
             'Like': jml_like,
             'Dislike': jml_dislike,
             'Total': (int(jml_like)-int(jml_dislike))

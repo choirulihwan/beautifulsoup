@@ -1,4 +1,7 @@
 # Byte-compiled / optimized / DLL files
+credentials.json
+*.xlsx
+*.pickle
 .idea/
 env/
 env2.7/
